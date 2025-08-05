@@ -1,6 +1,27 @@
-# video-highlight-tool
+# Video Highlight Tool
 
-This template should help get you started developing with Vue 3 in Vite.
+A web application that uses AI to help users create highlight clips from uploaded videos with synchronized transcripts.
+
+🔗 **Live Demo**: [https://video-highlight-tool-gilt.vercel.app/](https://video-highlight-tool-gilt.vercel.app/)
+
+## Features
+
+- 📹 Video upload with drag-and-drop support
+- 🤖 Mock AI processing for transcript generation
+- ✂️ Select specific sentences to create highlight clips
+- 🎬 Preview highlight clips with only selected segments
+- 📝 Synchronized transcript overlay on video
+- 📱 Responsive design for desktop and mobile
+- ⚡ Real-time synchronization between editing and preview areas
+
+## Tech Stack
+
+- **Frontend Framework**: Vue 3 with Composition API
+- **Build Tool**: Vite
+- **Language**: TypeScript
+- **State Management**: Pinia
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel
 
 ## Recommended IDE Setup
 
