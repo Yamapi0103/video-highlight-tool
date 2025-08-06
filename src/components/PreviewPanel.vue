@@ -99,27 +99,23 @@ const handleTimeUpdate = (event: Event) => {
 }
 
 const handlePlay = () => {
-  // 從第一個選中片段開始播放
+  // 從最近的下一個選中片段開始播放
   if (videoStore.selectedSentences.length > 0 && videoPlayer.value) {
-    const firstSegment = videoStore.selectedSentences[0]
-    if (
-      videoPlayer.value.currentTime < firstSegment.startTime ||
-      videoPlayer.value.currentTime >
-        videoStore.selectedSentences[videoStore.selectedSentences.length - 1].endTime
-    ) {
-      videoPlayer.value.currentTime = firstSegment.startTime
-      currentSegmentIndex.value = 0
+    const currentTime = videoPlayer.value.currentTime
+    
+    // 找到當前時間之後最近的選中片段
+    const nextSegmentIndex = videoStore.selectedSentences.findIndex(
+      s => s.startTime >= currentTime
+    )
+    
+    if (nextSegmentIndex !== -1) {
+      // 找到了下一個片段
+      currentSegmentIndex.value = nextSegmentIndex
+      videoPlayer.value.currentTime = videoStore.selectedSentences[nextSegmentIndex].startTime
     } else {
-      // 找到當前所在的片段
-      currentSegmentIndex.value = videoStore.selectedSentences.findIndex(
-        s =>
-          videoPlayer.value!.currentTime >= s.startTime &&
-          videoPlayer.value!.currentTime <= s.endTime
-      )
-      if (currentSegmentIndex.value === -1) {
-        currentSegmentIndex.value = 0
-        videoPlayer.value.currentTime = firstSegment.startTime
-      }
+      // 當前時間在所有片段之後，從第一個片段開始
+      currentSegmentIndex.value = 0
+      videoPlayer.value.currentTime = videoStore.selectedSentences[0].startTime
     }
   }
   videoStore.setIsPlaying(true)
