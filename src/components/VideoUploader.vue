@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white rounded-lg shadow-md p-6">
     <div v-if="!videoStore.videoFile" 
-         @drop="handleDrop"
+         @drop.prevent="handleDrop"
          @dragover.prevent
          @dragenter.prevent="isDragging = true"
          @dragleave="isDragging = false"
@@ -91,7 +91,6 @@ const handleFileUpload = (event: Event) => {
 }
 
 const handleDrop = (event: DragEvent) => {
-  event.preventDefault()
   isDragging.value = false
   
   const file = event.dataTransfer?.files[0]

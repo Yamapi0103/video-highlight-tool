@@ -77,7 +77,7 @@ const formatTime = (seconds: number): string => {
 }
 
 .highlight-segment {
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-normal) ease;
 }
 
 .highlight-segment:hover {
@@ -86,6 +86,6 @@ const formatTime = (seconds: number): string => {
 
 .playhead {
   pointer-events: none;
-  transition: left 0.1s linear;
+  transition: left var(--transition-fast) linear;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="transcript-panel overflow-y-auto h-full">
+  <div class="transcript-panel overflow-y-auto h-full p-2">
     <div v-for="section in videoStore.sections" :key="section.title" class="mb-6">
       <h3 class="font-semibold text-lg mb-3">{{ section.title }}</h3>
       
@@ -67,10 +67,9 @@ watch(currentSentenceId, (newId) => {
     
     // 如果不在視窗內，則滾動到中心位置
     if (!isInView) {
-      const scrollTop = container.scrollTop + elementRect.top - containerRect.top - containerRect.height / 2 + elementRect.height / 2
-      container.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
       })
     }
   }

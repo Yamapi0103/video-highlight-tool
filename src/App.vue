@@ -17,7 +17,7 @@
         </div>
         
         <!-- 右側：影片預覽區 -->
-        <div class="lg:w-1/2 h-1/2 lg:h-full bg-gray-800 rounded-lg shadow-md p-4 flex flex-col">
+        <div class="lg:w-1/2 h-2/3 lg:h-full bg-gray-800 rounded-lg shadow-md p-4 flex flex-col">
           <h2 class="text-lg md:text-xl font-semibold text-white mb-4 flex-shrink-0">Preview</h2>
           <PreviewPanel class="flex-1 overflow-hidden" />
         </div>
