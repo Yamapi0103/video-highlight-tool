@@ -1,7 +1,7 @@
 <template>
   <div class="preview-panel relative h-full flex flex-col">
     <!-- 影片播放器 -->
-    <div class="relative bg-black rounded-lg overflow-hidden">
+    <div class="relative bg-black rounded-lg overflow-hidden flex-1 flex items-center justify-center">
       <video
         ref="videoPlayer"
         :src="videoStore.videoUrl"
@@ -9,7 +9,7 @@
         @play="handlePlay"
         @pause="videoStore.setIsPlaying(false)"
         @loadedmetadata="handleVideoLoaded"
-        class="w-full"
+        class="w-full h-full object-contain"
         controls
       >
         您的瀏覽器不支援影片播放
@@ -51,7 +51,6 @@ const videoStore = useVideoStore()
 const videoPlayer = ref<HTMLVideoElement>()
 const videoDuration = ref(0)
 const currentSegmentIndex = ref(0)
-const isTransitioning = ref(false)
 
 const currentOverlayText = computed(() => {
   const sentence = videoStore.selectedSentences.find(
