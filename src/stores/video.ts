@@ -28,7 +28,7 @@ export const useVideoStore = defineStore('video', () => {
   const selectedSentences = computed(() => {
     return sections.value
       .flatMap(section => section.sentences.filter(sentence => sentence.selected))
-      .sort((a, b) => a.startTime - b.startTime)
+      // .sort((a, b) => a.startTime - b.startTime) // 假設 mock api 返回的時間軸都有按照順序可不需要 
   })
 
   const currentSentence = computed(() => {
