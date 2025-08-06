@@ -7,15 +7,15 @@
   --transition-fast: 0.1s;
   --transition-normal: 0.2s;
   --transition-slow: 0.3s;
-  
+
   /* Z-index 層級 */
   --z-overlay: 10;
   --z-modal: 20;
   --z-tooltip: 30;
-  
+
   /* 常用間距 */
   --spacing-player-controls: 60px;
-  
+
   /* 顏色透明度 */
   --overlay-bg: rgba(0, 0, 0, 0.8);
   --shadow-color: rgba(0, 0, 0, 0.3);

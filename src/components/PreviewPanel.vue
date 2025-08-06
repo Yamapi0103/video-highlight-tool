@@ -14,21 +14,21 @@
       >
         您的瀏覽器不支援影片播放
       </video>
-      
+
       <!-- 文字覆蓋層 -->
       <TextOverlay v-if="currentOverlayText" :text="currentOverlayText" />
     </div>
-    
+
     <!-- 時間軸 -->
     <div class="mt-4">
-      <Timeline 
+      <Timeline
         :duration="videoDuration"
         :currentTime="videoStore.currentTime"
         :highlights="videoStore.selectedSentences"
         @seek="seekToTime"
       />
     </div>
-    
+
     <!-- 重點片段資訊 -->
     <div class="mt-4 text-white">
       <p class="text-sm">
@@ -54,9 +54,8 @@ const currentSegmentIndex = ref(0)
 const isTransitioning = ref(false)
 
 const currentOverlayText = computed(() => {
-  const sentence = videoStore.selectedSentences.find(s => 
-    videoStore.currentTime >= s.startTime && 
-    videoStore.currentTime <= s.endTime
+  const sentence = videoStore.selectedSentences.find(
+    s => videoStore.currentTime >= s.startTime && videoStore.currentTime <= s.endTime
   )
   return sentence?.text || ''
 })
@@ -69,12 +68,12 @@ const totalHighlightDuration = computed(() => {
 
 const handleTimeUpdate = (event: Event) => {
   const video = event.target as HTMLVideoElement
-  
+
   // 只播放選中的片段
   if (videoStore.selectedSentences.length > 0 && videoStore.isPlaying) {
     const currentTime = video.currentTime
     const currentSegment = videoStore.selectedSentences[currentSegmentIndex.value]
-    
+
     if (currentSegment) {
       // 如果當前時間超過當前片段的結束時間
       if (currentTime >= currentSegment.endTime) {
@@ -96,7 +95,7 @@ const handleTimeUpdate = (event: Event) => {
       }
     }
   }
-  
+
   videoStore.setCurrentTime(video.currentTime)
 }
 
@@ -104,15 +103,19 @@ const handlePlay = () => {
   // 從第一個選中片段開始播放
   if (videoStore.selectedSentences.length > 0 && videoPlayer.value) {
     const firstSegment = videoStore.selectedSentences[0]
-    if (videoPlayer.value.currentTime < firstSegment.startTime || 
-        videoPlayer.value.currentTime > videoStore.selectedSentences[videoStore.selectedSentences.length - 1].endTime) {
+    if (
+      videoPlayer.value.currentTime < firstSegment.startTime ||
+      videoPlayer.value.currentTime >
+        videoStore.selectedSentences[videoStore.selectedSentences.length - 1].endTime
+    ) {
       videoPlayer.value.currentTime = firstSegment.startTime
       currentSegmentIndex.value = 0
     } else {
       // 找到當前所在的片段
-      currentSegmentIndex.value = videoStore.selectedSentences.findIndex(s => 
-        videoPlayer.value!.currentTime >= s.startTime && 
-        videoPlayer.value!.currentTime <= s.endTime
+      currentSegmentIndex.value = videoStore.selectedSentences.findIndex(
+        s =>
+          videoPlayer.value!.currentTime >= s.startTime &&
+          videoPlayer.value!.currentTime <= s.endTime
       )
       if (currentSegmentIndex.value === -1) {
         currentSegmentIndex.value = 0
@@ -142,11 +145,14 @@ const formatTime = (seconds: number): string => {
 }
 
 // 監聽從轉錄區傳來的時間跳轉
-watch(() => videoStore.currentTime, (newTime) => {
-  if (videoPlayer.value && Math.abs(videoPlayer.value.currentTime - newTime) > 0.5) {
-    videoPlayer.value.currentTime = newTime
+watch(
+  () => videoStore.currentTime,
+  newTime => {
+    if (videoPlayer.value && Math.abs(videoPlayer.value.currentTime - newTime) > 0.5) {
+      videoPlayer.value.currentTime = newTime
+    }
   }
-})
+)
 </script>
 
 <style scoped>

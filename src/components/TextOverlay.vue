@@ -19,7 +19,7 @@ defineProps<Props>()
 <style scoped>
 .text-overlay {
   position: absolute;
-  bottom: 15%;  /* 相對於影片高度的百分比，而不是固定 60px */
+  bottom: 15%; /* 相對於影片高度的百分比，而不是固定 60px */
   left: 50%;
   transform: translateX(-50%);
   max-width: 80%;
@@ -29,9 +29,9 @@ defineProps<Props>()
 .overlay-content {
   background: var(--overlay-bg);
   color: white;
-  padding: 0.75rem 1.5rem;  /* 使用 rem 而不是 px */
+  padding: 0.75rem 1.5rem; /* 使用 rem 而不是 px */
   border-radius: 0.5rem;
-  font-size: 1.125rem;      /* 18px = 1.125rem */
+  font-size: 1.125rem; /* 18px = 1.125rem */
   text-align: center;
   line-height: 1.5;
   box-shadow: 0 4px 6px var(--shadow-color);

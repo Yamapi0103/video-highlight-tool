@@ -1,6 +1,6 @@
 <template>
   <div class="timeline bg-gray-700 rounded-lg p-2">
-    <div 
+    <div
       class="timeline-track relative h-8 bg-gray-600 rounded cursor-pointer"
       @click="handleTrackClick"
       ref="trackRef"
@@ -15,7 +15,7 @@
           width: `${((highlight.endTime - highlight.startTime) / duration) * 100}%`
         }"
       />
-      
+
       <!-- 播放頭 -->
       <div
         class="playhead absolute top-0 h-full w-1 bg-red-500"
@@ -24,7 +24,7 @@
         <div class="absolute -top-1 -left-2 w-5 h-5 bg-red-500 rounded-full" />
       </div>
     </div>
-    
+
     <!-- 時間標記 -->
     <div class="flex justify-between mt-1 text-xs text-gray-400">
       <span>{{ formatTime(0) }}</span>
@@ -54,12 +54,12 @@ const trackRef = ref<HTMLDivElement>()
 
 const handleTrackClick = (event: MouseEvent) => {
   if (!trackRef.value) return
-  
+
   const rect = trackRef.value.getBoundingClientRect()
   const x = event.clientX - rect.left
   const percentage = x / rect.width
   const time = percentage * props.duration
-  
+
   emit('seek', Math.max(0, Math.min(time, props.duration)))
 }
 

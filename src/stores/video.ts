@@ -26,16 +26,16 @@ export const useVideoStore = defineStore('video', () => {
 
   // 計算屬性
   const selectedSentences = computed(() => {
-    return sections.value.flatMap(section => 
-      section.sentences.filter(sentence => sentence.selected)
-    ).sort((a, b) => a.startTime - b.startTime)
+    return sections.value
+      .flatMap(section => section.sentences.filter(sentence => sentence.selected))
+      .sort((a, b) => a.startTime - b.startTime)
   })
 
   const currentSentence = computed(() => {
-    return sections.value.flatMap(section => section.sentences)
-      .find(sentence => 
-        currentTime.value >= sentence.startTime && 
-        currentTime.value <= sentence.endTime
+    return sections.value
+      .flatMap(section => section.sentences)
+      .find(
+        sentence => currentTime.value >= sentence.startTime && currentTime.value <= sentence.endTime
       )
   })
 

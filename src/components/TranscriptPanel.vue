@@ -2,7 +2,7 @@
   <div class="transcript-panel overflow-y-auto h-full p-2">
     <div v-for="section in videoStore.sections" :key="section.title" class="mb-6">
       <h3 class="font-semibold text-lg mb-3">{{ section.title }}</h3>
-      
+
       <div class="space-y-2">
         <div
           v-for="sentence in section.sentences"
@@ -48,23 +48,23 @@ const jumpToTime = (time: number) => {
 }
 
 // 自動滾動到當前句子
-watch(currentSentenceId, (newId) => {
+watch(currentSentenceId, newId => {
   if (newId && videoStore.isPlaying) {
     // 使用 nextTick 確保 DOM 更新後再滾動
     const element = document.querySelector(`.sentence-item:has([data-id="${newId}"])`)
     if (!element) return
-    
+
     // 獲取容器和元素的位置
     const container = document.querySelector('.transcript-panel')
     if (!container) return
-    
+
     const containerRect = container.getBoundingClientRect()
     const elementRect = element.getBoundingClientRect()
-    
+
     // 檢查元素是否在視窗內
-    const isInView = elementRect.top >= containerRect.top && 
-                     elementRect.bottom <= containerRect.bottom
-    
+    const isInView =
+      elementRect.top >= containerRect.top && elementRect.bottom <= containerRect.bottom
+
     // 如果不在視窗內，則滾動到中心位置
     if (!isInView) {
       element.scrollIntoView({
