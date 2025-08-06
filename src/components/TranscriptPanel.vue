@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useVideoStore } from '@/stores/video'
 import type { Sentence } from '@/stores/video'
 
@@ -51,7 +51,7 @@ const jumpToTime = (time: number) => {
 watch(currentSentenceId, newId => {
   if (newId && videoStore.isPlaying) {
     // 使用 nextTick 確保 DOM 更新後再滾動
-    const element = document.querySelector(`.sentence-item:has([data-id="${newId}"])`)
+    const element = document.querySelector(`.sentence-item[data-id="${newId}"]`)
     if (!element) return
 
     // 獲取容器和元素的位置
