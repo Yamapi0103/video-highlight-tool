@@ -37,18 +37,42 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+⚠️ **Important**: This project uses Yarn as the package manager. Please use Yarn for all commands.
+
+### Install Dependencies
+
 ```sh
-npm install
+yarn install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Type-Check
 
 ```sh
-npm run build
+yarn type-check
+```
+
+### Build for Production
+
+```sh
+yarn build
+```
+
+Note: Running `yarn build` will automatically run type-checking first (via prebuild script)
+
+### Preview Production Build
+
+```sh
+yarn preview
+```
+
+### Format Code
+
+```sh
+yarn prettier --write "src/**/*.{js,ts,vue,css}" "*.{js,ts,json,md}"
 ```
