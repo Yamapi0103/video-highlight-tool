@@ -80,9 +80,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useVideoStore } from '@/stores/video'
 import LoadingSpinner from './LoadingSpinner.vue'
 
+const router = useRouter()
 const videoStore = useVideoStore()
 const fileInput = ref<HTMLInputElement>()
 const processingProgress = ref(0)
@@ -280,6 +282,8 @@ const processVideo = async () => {
     setTimeout(() => {
       videoStore.isProcessing = false
       processingProgress.value = 0
+      // 處理完成後導航到預覽頁面
+      router.push('/preview')
     }, 200)
   }, 2000)
 }
