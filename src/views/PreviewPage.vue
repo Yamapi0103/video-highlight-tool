@@ -1,7 +1,26 @@
 <template>
   <div class="min-h-screen bg-gray-100">
+    <!-- Mobile Breadcrumb (full width for sticky) -->
+    <div class="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div class="px-4 py-3">
+        <div class="flex items-center justify-between">
+          <button
+            @click="router.push('/')"
+            class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span class="text-sm font-medium">Back to Home</span>
+          </button>
+          <h1 class="text-sm font-semibold text-gray-900">Video Highlight Editor</h1>
+        </div>
+      </div>
+    </div>
+
     <div class="container mx-auto p-4">
-      <div class="flex items-center justify-between mb-8">
+      <!-- Desktop Header -->
+      <div class="hidden lg:flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold">Video Highlight Editor</h1>
         <button
           @click="router.push('/')"

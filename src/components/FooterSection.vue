@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-gray-800 text-white py-4 mt-8">
-    <div class="mx-auto px-4 text-center">
+    <div class="container mx-auto px-4 text-center">
       <a
         href="https://github.com/Yamapi0103/video-highlight-tool"
         target="_blank"

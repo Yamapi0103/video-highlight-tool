@@ -56,7 +56,9 @@
             <p class="text-sm text-gray-500">{{ formatFileSize(videoStore.videoFile.size) }}</p>
           </div>
         </div>
-        <button @click="removeVideo" class="text-red-600 hover:text-red-700">移除</button>
+        <button @click="removeVideo" class="text-red-600 hover:text-red-700 whitespace-nowrap">
+          移除
+        </button>
       </div>
 
       <button
