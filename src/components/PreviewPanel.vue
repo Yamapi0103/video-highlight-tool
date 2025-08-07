@@ -12,6 +12,8 @@
         @progress="handleProgress"
         @click="togglePlay"
         class="w-full h-full object-contain cursor-pointer"
+        playsinline
+        :webkit-playsinline="true"
       >
         您的瀏覽器不支援影片播放
       </video>
