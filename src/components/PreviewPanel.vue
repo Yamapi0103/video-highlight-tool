@@ -9,8 +9,9 @@
         @play="handlePlay"
         @pause="videoStore.setIsPlaying(false)"
         @loadedmetadata="handleVideoLoaded"
-        class="w-full h-full object-contain"
-        controls
+        @progress="handleProgress"
+        @click="togglePlay"
+        class="w-full h-full object-contain cursor-pointer"
       >
         您的瀏覽器不支援影片播放
       </video>
@@ -18,6 +19,23 @@
       <!-- 文字覆蓋層 -->
       <TextOverlay v-if="currentOverlayText" :text="currentOverlayText" />
     </div>
+
+    <!-- 自定義控制條 -->
+    <VideoControls
+      :current-time="videoStore.currentTime"
+      :duration="videoDuration"
+      :is-playing="videoStore.isPlaying"
+      :volume="volume"
+      :is-muted="isMuted"
+      :buffered="buffered"
+      :video-element="videoPlayer"
+      :highlight-segments="videoStore.selectedSentences"
+      @toggle-play="togglePlay"
+      @seek="seekToTime"
+      @volume-change="handleVolumeChange"
+      @toggle-fullscreen="toggleFullscreen"
+      class="mt-2"
+    />
 
     <!-- 時間軸 -->
     <div class="mt-4">
@@ -46,11 +64,15 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useVideoStore } from '@/stores/video'
 import TextOverlay from './TextOverlay.vue'
 import Timeline from './Timeline.vue'
+import VideoControls from './VideoControls.vue'
 
 const videoStore = useVideoStore()
 const videoPlayer = ref<HTMLVideoElement>()
 const videoDuration = ref(0)
 const currentSegmentIndex = ref(0)
+const volume = ref(1)
+const isMuted = ref(false)
+const buffered = ref<TimeRanges>()
 
 const currentOverlayText = computed(() => {
   const sentence = videoStore.selectedSentences.find(
@@ -137,6 +159,41 @@ const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60)
   const secs = Math.floor(seconds % 60)
   return `${mins}:${secs.toString().padStart(2, '0')}`
+}
+
+const togglePlay = () => {
+  if (videoPlayer.value) {
+    if (videoStore.isPlaying) {
+      videoPlayer.value.pause()
+    } else {
+      videoPlayer.value.play()
+    }
+  }
+}
+
+const handleVolumeChange = (newVolume: number) => {
+  if (videoPlayer.value) {
+    videoPlayer.value.volume = newVolume
+    volume.value = newVolume
+    isMuted.value = newVolume === 0
+  }
+}
+
+const toggleFullscreen = () => {
+  const container = document.querySelector('.preview-panel') as HTMLElement
+  if (container) {
+    if (!document.fullscreenElement) {
+      container.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
+  }
+}
+
+const handleProgress = () => {
+  if (videoPlayer.value) {
+    buffered.value = videoPlayer.value.buffered
+  }
 }
 
 // 監聽從轉錄區傳來的時間跳轉
